@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeonPath Lab</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #020617;
+      /* Slate 950 */
+      color: #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Animation Classes applied via JS */
+    .node-visited {
+      animation-name: visitedAnimation;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-delay: 0;
+      animation-direction: alternate;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-play-state: running;
+    }
+
+    .node-path {
+      animation-name: shortestPathAnimation;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-out;
+      animation-delay: 0;
+      animation-direction: alternate;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-play-state: running;
+    }
+
+    .node-wall {
+      animation-name: wallAnimation;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes visitedAnimation {
+      0% {
+        transform: scale(0.3);
+        background-color: #3b0764;
+        /* purple-950 */
+        border-radius: 100%;
+      }
+
+      50% {
+        background-color: #7c3aed;
+        /* violet-600 */
+      }
+
+      100% {
+        transform: scale(1);
+        background-color: #3b82f6;
+        /* blue-500 */
+        box-shadow: 0 0 5px #3b82f6;
+      }
+    }
+
+    @keyframes shortestPathAnimation {
+      0% {
+        transform: scale(0.6);
+        background-color: #facc15;
+        /* yellow-400 */
+      }
+
+      100% {
+        transform: scale(1);
+        background-color: #fbbf24;
+        /* amber-400 */
+        box-shadow: 0 0 10px #fbbf24, 0 0 20px #fbbf24;
+      }
+    }
+
+    @keyframes wallAnimation {
+      0% {
+        transform: scale(0.3);
+        background-color: #1e293b;
+      }
+
+      100% {
+        transform: scale(1);
+        background-color: #334155;
+        /* slate-700 */
+        border: 1px solid #475569;
+      }
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="./index.tsx"></script>
+</body>
+
+</html>

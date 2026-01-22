@@ -10,7 +10,7 @@ jobs:
     
     strategy:
       matrix:
-        app: [arcade-room, square-shadows, thermometer]
+        app: [arcade-room, square-shadows, thermometer, focus-flow, labyrinth-generator]
     
     steps:
     - uses: actions/checkout@v4

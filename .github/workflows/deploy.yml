@@ -44,15 +44,31 @@ jobs:
           npm install
           npm run build
 
+      - name: Build focus-flow
+        run: |
+          cd focus-flow
+          npm install
+          npm run build
+
+      - name: Build labyrinth-generator
+        run: |
+          cd labyrinth-generator
+          npm install
+          npm run build
+
       - name: Prepare deployment directory
         run: |
           mkdir -p _site/arcade-room
           mkdir -p _site/square-shadows
           mkdir -p _site/thermometer
+          mkdir -p _site/focus-flow
+          mkdir -p _site/labyrinth-generator
           
           cp -r arcade-room/dist/* _site/arcade-room/
           cp -r square-shadows/dist/* _site/square-shadows/
           cp -r thermometer/dist/* _site/thermometer/
+          cp -r focus-flow/dist/* _site/focus-flow/
+          cp -r labyrinth-generator/dist/* _site/labyrinth-generator/
           
           touch _site/.nojekyll
           
@@ -181,6 +197,18 @@ jobs:
                   <h2>Thermometer</h2>
                   <p>Interactive thermometer with weather integration and dynamic visual effects.</p>
                   <a href="./thermometer/">Check</a>
+                </div>
+                <div class="app-card">
+                  <span class="app-icon">⏱️</span>
+                  <h2>Focus Flow</h2>
+                  <p>A minimalist, elegant timer with flow tracking and ambient aesthetics.</p>
+                  <a href="./focus-flow/">Start Focus</a>
+                </div>
+                <div class="app-card">
+                  <span class="app-icon">🧩</span>
+                  <h2>Labyrinth Generator</h2>
+                  <p>A high-performance, interactive pathfinding algorithm visualizer.</p>
+                  <a href="./labyrinth-generator/">Explore</a>
                 </div>
               </div>
               <footer>

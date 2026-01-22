@@ -21,6 +21,16 @@ An interactive thermometer application with weather integration. Features real-t
 
 **Live Demo:** https://ft2801.github.io/Web-Apps-Repo/thermometer/
 
+### 4. **Focus Flow**
+A minimalist, elegant timer with flow tracking and ambient aesthetics.
+
+**Live Demo:** https://ft2801.github.io/Web-Apps-Repo/focus-flow/
+
+### 5. **Labyrinth Generator**
+A high-performance, interactive pathfinding algorithm visualizer.
+
+**Live Demo:** https://ft2801.github.io/Web-Apps-Repo/labyrinth-generator/
+
 ## 🚀 Quick Start
 
 ### Prerequisites
