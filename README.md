@@ -31,6 +31,16 @@ A high-performance, interactive pathfinding algorithm visualizer.
 
 **Live Demo:** https://ft2801.github.io/Web-Apps-Repo/labyrinth-generator/
 
+### 6. **Palette Picker**
+Professional color palette generator with harmony rules, real-time contrast checking (WCAG), and UI preview.
+
+**Live Demo:** https://ft2801.github.io/Web-Apps-Repo/palette-picker/
+
+### 7. **Physics Sandbox**
+Interactive 2D physics playground featuring a blueprint aesthetic. Create shapes, simulate gravity, and experiment with collisions.
+
+**Live Demo:** https://ft2801.github.io/Web-Apps-Repo/physics-sandbox/
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -48,6 +58,14 @@ cd arcade-room
 cd square-shadows
 # or
 cd thermometer
+# or
+cd focus-flow
+# or
+cd labyrinth-generator
+# or
+cd palette-picker
+# or
+cd physics-sandbox
 
 # Install dependencies
 npm install
@@ -75,6 +93,20 @@ Web-Apps-Repo/
 ├── thermometer/          # Weather thermometer
 │   ├── components/
 │   ├── utils/
+│   └── vite.config.ts
+├── focus-flow/           # Focus timer
+│   ├── components/
+│   └── vite.config.ts
+├── labyrinth-generator/  # Pathfinding visualizer
+│   ├── components/
+│   ├── services/
+│   └── vite.config.ts
+├── palette-picker/       # Color tools
+│   ├── components/
+│   ├── utils/
+│   └── vite.config.ts
+├── physics-sandbox/      # 2D Physics engine
+│   ├── components/
 │   └── vite.config.ts
 └── README.md
 ```

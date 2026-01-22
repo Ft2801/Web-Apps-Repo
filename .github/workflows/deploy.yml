@@ -56,6 +56,18 @@ jobs:
           npm install
           npm run build
 
+      - name: Build palette-picker
+        run: |
+          cd palette-picker
+          npm install
+          npm run build
+
+      - name: Build physics-sandbox
+        run: |
+          cd physics-sandbox
+          npm install
+          npm run build
+
       - name: Prepare deployment directory
         run: |
           mkdir -p _site/arcade-room
@@ -63,12 +75,16 @@ jobs:
           mkdir -p _site/thermometer
           mkdir -p _site/focus-flow
           mkdir -p _site/labyrinth-generator
+          mkdir -p _site/palette-picker
+          mkdir -p _site/physics-sandbox
           
           cp -r arcade-room/dist/* _site/arcade-room/
           cp -r square-shadows/dist/* _site/square-shadows/
           cp -r thermometer/dist/* _site/thermometer/
           cp -r focus-flow/dist/* _site/focus-flow/
           cp -r labyrinth-generator/dist/* _site/labyrinth-generator/
+          cp -r palette-picker/dist/* _site/palette-picker/
+          cp -r physics-sandbox/dist/* _site/physics-sandbox/
           
           touch _site/.nojekyll
           
@@ -209,6 +225,18 @@ jobs:
                   <h2>Labyrinth Generator</h2>
                   <p>A high-performance, interactive pathfinding algorithm visualizer.</p>
                   <a href="./labyrinth-generator/">Explore</a>
+                </div>
+                <div class="app-card">
+                  <span class="app-icon">🎨</span>
+                  <h2>Palette Picker</h2>
+                  <p>Professional color palette generator with harmony rules and contrast checking.</p>
+                  <a href="./palette-picker/">Create</a>
+                </div>
+                <div class="app-card">
+                  <span class="app-icon">⚛️</span>
+                  <h2>Physics Sandbox</h2>
+                  <p>Interactive 2D physics playground with gravity simulation and shape manipulation.</p>
+                  <a href="./physics-sandbox/">Simulate</a>
                 </div>
               </div>
               <footer>

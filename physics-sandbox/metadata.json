@@ -1,0 +1,5 @@
+{
+  "name": "Physics Sandbox",
+  "description": "An interactive 2D physics sandbox with a blueprint aesthetic. Create, drag, and throw shapes in a gravity-simulated environment.",
+  "requestFramePermissions": []
+}
