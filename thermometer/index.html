@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thermometer - Interactive Weather App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        overflow: hidden; /* Prevent scrollbars from particles */
+        background-color: #000;
+      }
+      
+      /* Snow Animation */
+      @keyframes snow-fall {
+        0% { transform: translateY(-10vh) translateX(-10px); }
+        100% { transform: translateY(110vh) translateX(10px); }
+      }
+
+      /* Rain Animation */
+      @keyframes rain-fall {
+        0% { transform: translateY(-10vh) skewX(-15deg); }
+        100% { transform: translateY(110vh) skewX(-15deg); }
+      }
+
+      /* Fire/Heat Animation */
+      @keyframes fire-rise {
+        0% { transform: translateY(10vh) scale(1) translateX(0); opacity: 1; }
+        100% { transform: translateY(-80vh) scale(0) translateX(20px); opacity: 0; }
+      }
+      
+      @keyframes fire-wobble {
+        0%, 100% { margin-left: -5px; }
+        50% { margin-left: 5px; }
+      }
+
+      /* Heat Haze Pulse */
+      @keyframes pulse-heat {
+        0% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(1.05); }
+        100% { opacity: 0.3; transform: scale(1); }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="./index.tsx"></script>
+</body>
+</html>

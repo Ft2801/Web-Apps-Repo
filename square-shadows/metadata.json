@@ -1,0 +1,5 @@
+{
+  "name": "Square Shadows",
+  "description": "An interactive 2D visualization featuring rotating squares with shadow effects and custom cursor interactions. Built with React Three Fiber for stunning real-time graphics.",
+  "requestFramePermissions": []
+}

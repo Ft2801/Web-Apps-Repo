@@ -1,0 +1,5 @@
+{
+  "name": "Arcade Room",
+  "description": "Play Tic Tac Toe, Connect 4, Memory, Snake, 2048, Rock Paper Scissors, Simon Says, Whack-a-Light, Minefield, and Reflex. Challenge the computer or train your brain.",
+  "requestFramePermissions": []
+}

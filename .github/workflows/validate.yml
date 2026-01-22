@@ -1,0 +1,41 @@
+name: Validate Builds
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        app: [arcade-room, square-shadows, thermometer]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: ${{ matrix.app }}/package-lock.json
+    
+    - name: Install dependencies for ${{ matrix.app }}
+      run: cd ${{ matrix.app }} && npm install
+    
+    - name: Build ${{ matrix.app }}
+      run: cd ${{ matrix.app }} && npm run build
+    
+    - name: Verify build output exists
+      run: |
+        if [ ! -d "${{ matrix.app }}/dist" ]; then
+          echo "Error: Build output directory not found for ${{ matrix.app }}"
+          exit 1
+        fi
+        if [ ! -f "${{ matrix.app }}/dist/index.html" ]; then
+          echo "Error: index.html not found in ${{ matrix.app }}/dist"
+          exit 1
+        fi
+        echo "✓ Build validation passed for ${{ matrix.app }}"

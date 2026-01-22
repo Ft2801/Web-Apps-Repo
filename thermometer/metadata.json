@@ -1,0 +1,5 @@
+{
+  "name": "Thermometer",
+  "description": "An interactive thermometer application with weather integration. Features real-time temperature display with visual feedback and dynamic weather effects.",
+  "requestFramePermissions": []
+}

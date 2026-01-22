@@ -1,0 +1,211 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build arcade-room
+        run: |
+          cd arcade-room
+          npm install
+          npm run build
+
+      - name: Build square-shadows
+        run: |
+          cd square-shadows
+          npm install
+          npm run build
+
+      - name: Build thermometer
+        run: |
+          cd thermometer
+          npm install
+          npm run build
+
+      - name: Prepare deployment directory
+        run: |
+          mkdir -p _site/arcade-room
+          mkdir -p _site/square-shadows
+          mkdir -p _site/thermometer
+          
+          cp -r arcade-room/dist/* _site/arcade-room/
+          cp -r square-shadows/dist/* _site/square-shadows/
+          cp -r thermometer/dist/* _site/thermometer/
+          
+          touch _site/.nojekyll
+          
+          # Create landing page
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Web Apps Collection</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <style>
+              * { margin: 0; padding: 0; box-sizing: border-box; }
+              body {
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+                background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 20px;
+              }
+              .container { max-width: 1200px; width: 100%; }
+              h1 {
+                text-align: center;
+                color: #fff;
+                margin-bottom: 16px;
+                font-size: 3rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+              }
+              .subtitle {
+                text-align: center;
+                color: rgba(255,255,255,0.6);
+                margin-bottom: 60px;
+                font-size: 1.1rem;
+              }
+              .apps-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 30px;
+              }
+              .app-card {
+                background: rgba(255,255,255,0.05);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 20px;
+                padding: 40px 30px;
+                text-align: center;
+                transition: all 0.3s ease;
+              }
+              .app-card:hover {
+                transform: translateY(-8px);
+                background: rgba(255,255,255,0.08);
+                border-color: rgba(255,255,255,0.2);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+              }
+              .app-icon {
+                font-size: 3.5rem;
+                margin-bottom: 20px;
+                display: block;
+              }
+              .app-card h2 {
+                color: #fff;
+                margin-bottom: 12px;
+                font-size: 1.5rem;
+                font-weight: 600;
+              }
+              .app-card p {
+                color: rgba(255,255,255,0.6);
+                margin-bottom: 28px;
+                line-height: 1.6;
+              }
+              .app-card a {
+                display: inline-block;
+                padding: 14px 36px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                text-decoration: none;
+                border-radius: 12px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+              }
+              .app-card a:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+              }
+              footer {
+                text-align: center;
+                color: rgba(255,255,255,0.4);
+                margin-top: 60px;
+                font-size: 0.9rem;
+              }
+              footer a {
+                color: #667eea;
+                text-decoration: none;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>🎮 Web Apps</h1>
+              <p class="subtitle">A collection of interactive web applications</p>
+              <div class="apps-grid">
+                <div class="app-card">
+                  <span class="app-icon">🕹️</span>
+                  <h2>Arcade Room</h2>
+                  <p>Classic games collection: Tic Tac Toe, Connect 4, Memory, Snake, 2048, and more!</p>
+                  <a href="./arcade-room/">Play Now</a>
+                </div>
+                <div class="app-card">
+                  <span class="app-icon">🎨</span>
+                  <h2>Square Shadows</h2>
+                  <p>Interactive 2D visualization with rotating squares and stunning shadow effects.</p>
+                  <a href="./square-shadows/">View</a>
+                </div>
+                <div class="app-card">
+                  <span class="app-icon">🌡️</span>
+                  <h2>Thermometer</h2>
+                  <p>Interactive thermometer with weather integration and dynamic visual effects.</p>
+                  <a href="./thermometer/">Check</a>
+                </div>
+              </div>
+              <footer>
+                <p>Built with React, TypeScript & Vite | <a href="https://github.com/Ft2801/Web-Apps-Repo">GitHub</a></p>
+              </footer>
+            </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
