@@ -4,7 +4,7 @@ A collection of interactive web applications built with React, TypeScript, and V
 
 ## 📱 Applications
 
-This repository contains three standalone applications, deployed to GitHub Pages:
+This repository contains a series of standalone applications, deployed to GitHub Pages:
 
 ### 1. **Arcade Room**
 Play Tic Tac Toe, Connect 4, Memory, Snake, 2048, Rock Paper Scissors, Simon Says, Whack-a-Light, Minefield, and Reflex. Challenge the computer or train your brain.
@@ -116,7 +116,6 @@ Web-Apps-Repo/
 - **Framework:** React 19
 - **Language:** TypeScript
 - **Build Tool:** Vite
-- **3D Graphics:** Three.js / React Three Fiber
 - **Icons:** Lucide React
 - **Styling:** Tailwind CSS (where applicable)
 
