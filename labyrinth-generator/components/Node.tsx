@@ -26,10 +26,10 @@ const Node: React.FC<NodeProps> = ({
   const extraClassName = isFinish
     ? 'bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.8)] z-10 scale-110 cursor-grab active:cursor-grabbing'
     : isStart
-    ? 'bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.8)] z-10 scale-110 cursor-grab active:cursor-grabbing'
-    : isWall
-    ? 'node-wall' // Using the CSS animation class for walls
-    : 'bg-transparent hover:bg-slate-800';
+      ? 'bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.8)] z-10 scale-110 cursor-grab active:cursor-grabbing'
+      : isWall
+        ? 'node-wall' // Using the CSS animation class for walls
+        : 'bg-transparent hover:bg-slate-800';
 
   return (
     <div
@@ -38,7 +38,7 @@ const Node: React.FC<NodeProps> = ({
       style={{ width: `${width}px`, height: `${width}px` }}
       onMouseDown={(e) => {
         // Prevent default dragging of the element itself, allowing our custom logic to take over
-        e.preventDefault(); 
+        e.preventDefault();
         onMouseDown(row, col);
       }}
       onMouseEnter={() => {
@@ -46,12 +46,12 @@ const Node: React.FC<NodeProps> = ({
       }}
       onMouseUp={() => onMouseUp()}
     >
-        {isStart && (
-           <div className="w-full h-full flex items-center justify-center text-[10px] text-black font-bold pointer-events-none">S</div>
-        )}
-        {isFinish && (
-           <div className="w-full h-full flex items-center justify-center text-[10px] text-black font-bold pointer-events-none">E</div>
-        )}
+      {isStart && (
+        <div className="w-full h-full flex items-center justify-center text-[10px] text-black font-bold pointer-events-none">S</div>
+      )}
+      {isFinish && (
+        <div className="w-full h-full flex items-center justify-center text-[10px] text-black font-bold pointer-events-none">E</div>
+      )}
     </div>
   );
 };
@@ -61,6 +61,11 @@ export default memo(Node, (prevProps, nextProps) => {
     prevProps.isStart === nextProps.isStart &&
     prevProps.isFinish === nextProps.isFinish &&
     prevProps.isWall === nextProps.isWall &&
-    prevProps.width === nextProps.width
+    prevProps.width === nextProps.width &&
+    // Important: We assume onMouseDown/Enter/Up are stable references (useCallback in parent)
+    // If they aren't, this memo will still work but might miss updates if handlers change.
+    // Given App.tsx implementation, they are stable for the duration of visualization.
+    prevProps.col === nextProps.col &&
+    prevProps.row === nextProps.row
   );
 });
