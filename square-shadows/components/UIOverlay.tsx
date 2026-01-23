@@ -42,12 +42,11 @@ export const UIOverlay: React.FC<UIOverlayProps> = ({ settings, onUpdate, onRese
 
       {/* Settings Panel */}
       <div
-        className={`absolute top-20 right-6 w-72 bg-slate-900/90 backdrop-blur-md border border-slate-700 rounded-2xl p-6 pointer-events-auto shadow-2xl transition-all duration-300 origin-top-right transform ${
-          isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 -translate-y-4 pointer-events-none'
-        }`}
+        className={`absolute top-20 right-6 w-72 bg-slate-900/90 backdrop-blur-md border border-slate-700 rounded-2xl p-6 pointer-events-auto shadow-2xl transition-all duration-300 origin-top-right transform ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 -translate-y-4 pointer-events-none invisible'
+          }`}
       >
         <h2 className="text-white text-lg font-bold mb-4 border-b border-slate-700 pb-2">Settings</h2>
-        
+
         <div className="space-y-5">
           {/* Movement Speed */}
           <div>

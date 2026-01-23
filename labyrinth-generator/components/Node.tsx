@@ -9,6 +9,7 @@ interface NodeProps {
   onMouseDown: (row: number, col: number) => void;
   onMouseEnter: (row: number, col: number) => void;
   onMouseUp: () => void;
+  onTouchStart?: (row: number, col: number) => void;
   width: number; // width in pixels
 }
 
@@ -21,6 +22,7 @@ const Node: React.FC<NodeProps> = ({
   onMouseDown,
   onMouseEnter,
   onMouseUp,
+  onTouchStart,
   width,
 }) => {
   const extraClassName = isFinish
@@ -40,6 +42,11 @@ const Node: React.FC<NodeProps> = ({
         // Prevent default dragging of the element itself, allowing our custom logic to take over
         e.preventDefault();
         onMouseDown(row, col);
+      }}
+      onTouchStart={(e) => {
+        // Prevent default to stop scrolling
+        if (e.cancelable) e.preventDefault();
+        if (onTouchStart) onTouchStart(row, col);
       }}
       onMouseEnter={() => {
         onMouseEnter(row, col);

@@ -259,6 +259,26 @@ const App: React.FC = () => {
     });
   }, [isVisualizing]);
 
+  const handleTouchStart = useCallback((row: number, col: number) => {
+    handleMouseDown(row, col);
+  }, [handleMouseDown]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    // Prevent scrolling
+    if (e.cancelable && e.target === e.currentTarget) e.preventDefault();
+
+    const touch = e.touches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+
+    if (target && target.id && target.id.startsWith('node-')) {
+      const parts = target.id.split('-');
+      const row = parseInt(parts[1]);
+      const col = parseInt(parts[2]);
+
+      handleMouseEnter(row, col);
+    }
+  }, [handleMouseEnter]);
+
   // --- Visualization Actions ---
 
   const clearPath = () => {
@@ -429,7 +449,8 @@ const App: React.FC = () => {
           }}
         >
           <div
-            className="grid gap-[1px] bg-slate-800"
+            className="grid gap-[1px] bg-slate-800 touch-none"
+            onTouchMove={handleTouchMove}
             style={{
               gridTemplateColumns: `repeat(${cols}, ${nodeWidth}px)`,
               width: 'fit-content'
@@ -447,6 +468,7 @@ const App: React.FC = () => {
                   onMouseDown={handleMouseDown}
                   onMouseEnter={handleMouseEnter}
                   onMouseUp={() => { draggingNodeRef.current = null; isMouseDownRef.current = false; }}
+                  onTouchStart={handleTouchStart}
                   width={nodeWidth}
                 />
               ))
@@ -454,7 +476,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
